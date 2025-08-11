@@ -29,7 +29,7 @@ if ( ! $out ) {
 }
 
 // Write header to output CSV
-fputcsv( $out, [ 'email', 'encrypted_data' ] );
+fputcsv( $out, [ 'Email', '1 Click Form Data' ] );
 
 // Get the header row from the input CSV
 $headers = fgetcsv( $in );
