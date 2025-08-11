@@ -70,7 +70,7 @@ while ( ( $row = fgetcsv( $in ) ) !== false ) {
     }
 
     // Base64 encode encrypted string for safe CSV output
-    $encryptedBase64 = base64_encode( $encrypted );
+    $encryptedBase64 = gpch_base64url_encode( $encrypted );
 
     // Write to output
     fputcsv( $out, [ $email, $encryptedBase64 ] );
@@ -82,3 +82,15 @@ fclose( $out );
 openssl_free_key( $pubKeyResource );
 
 echo "Encryption complete. Output saved to $outputFile\n";
+
+
+/**
+ * URL safe base64 encode of binary data
+ *
+ * @param $data
+ *
+ * @return string
+ */
+function gpch_base64url_encode($data) {
+    return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+}
